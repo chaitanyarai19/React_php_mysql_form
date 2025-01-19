@@ -1,5 +1,6 @@
 import { useState } from "react";
 import $ from "jquery";
+import "./form.css";
 
 export const RegForm = () => {
   // Define states
@@ -38,7 +39,7 @@ export const RegForm = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "100vh",
+        height: "70vh",
       }}
     >
       <form method="post" onSubmit={handleRegisterForm}>
@@ -49,6 +50,7 @@ export const RegForm = () => {
           name="name"
           placeholder="Enter name"
           value={name}
+          required
           onChange={(e) => setName(e.target.value)}
         />
         <br />
@@ -58,6 +60,7 @@ export const RegForm = () => {
           name="email"
           placeholder="Enter email"
           value={email}
+          required
           onChange={(e) => setEmail(e.target.value)}
         />
         <br />
@@ -67,20 +70,21 @@ export const RegForm = () => {
           name="password"
           placeholder="Enter password"
           value={password}
+          required
           onChange={(e) => setPassword(e.target.value)}
         />
         <br />
         <br />
-        <input type="submit" value="Submit" />
+        <input className="button" type="submit" value="Register" />
         <br />
         <br />
         {result && (
           <div>
-            <h2>Form Data {result.message}</h2>
-            {result.error ? (
-              <p style={{ color: "red" }}>{result.error}</p>
+            {result.status === "error" ? (
+              <p style={{ color: "red" }}>{result.message}</p>
             ) : (
               <>
+              <h2 style={{ color: "green" }}>{result.message}</h2>
                 <p>
                   <strong>Name:</strong> {result.name}
                 </p>
